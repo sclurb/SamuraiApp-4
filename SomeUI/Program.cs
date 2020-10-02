@@ -19,6 +19,8 @@ namespace SomeUI
             
         {
             //Console.WriteLine($"The number of Samurais created is: {seeder.numberOfSqlCommandsSaved}");
+
+            //Seeding join entities
             //query.EnlistSamuraiIntoBattleUntracked("John Basilone", "Guadalcanal");
             //query.EnlistSamuraiIntoBattleUntracked("John Basilone", "Iwo Jima");
             //query.EnlistSamuraiIntoBattleUntracked("Merritt Austin Edson", "Tarawa");

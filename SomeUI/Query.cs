@@ -32,6 +32,8 @@ namespace SomeUI
             return _context.SaveChanges();
         }
 
+
+
         public int EnlistSamuraiIntoBattleUntracked(string samuraiName, string battleName)
         {
             Samurai samurai;
