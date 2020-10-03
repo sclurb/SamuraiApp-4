@@ -18,6 +18,56 @@ namespace SomeUI
 
         }
 
+
+        public int RemoveSamurai(string name)
+        {
+            var samurai = _context.Samurais.FirstOrDefault(s => s.Name == name);
+            _context.Remove(samurai);
+            return _context.SaveChanges();
+        }
+
+        public int MakeSamurai(Samurai samurai)
+        {
+            _context.Samurais.Add(samurai);
+            return _context.SaveChanges();
+        }
+
+        public List<Samurai> RetrieveSamuraisCreatedInPastWeek()
+        {
+            var oneweekago = DateTime.Now.AddMinutes(-15);
+            var samurais = _context.Samurais
+                .Where(s => EF.Property<DateTime>(s, "Created") >= oneweekago)
+                .Include(q => q.Quotes)
+                .ToList();
+            return samurais;
+
+            //var samurais = _context.Samurais
+            //    .Where(s => EF.Property<DateTime>(s, "Created") >= oneweekago)
+            //    .Select(s => new { s.Id, s.Name, Created=EF.Property<DateTime>(s, "Created")})
+            //    .ToList();
+            //return samurais;
+        }
+
+        public int CreateSamurai(string name)
+        {
+            var samurai = new Samurai { Name = name };
+            _context.Samurais.Add(samurai);
+            var timestamp = DateTime.Now;
+            _context.Entry(samurai).Property("Created").CurrentValue = timestamp;
+            _context.Entry(samurai).Property("LastModified").CurrentValue = timestamp;
+           return  _context.SaveChanges();
+        }
+
+        public int AddCreateDateToSamurai(string name)
+        {
+            var samurai = _context.Samurais.FirstOrDefault(sa => sa.Name == name);
+            //_context.Samurais.Add(samurai);
+            var timestamp = DateTime.Now;
+            _context.Entry(samurai).Property("Created").CurrentValue = timestamp;
+            _context.Entry(samurai).Property("LastModified").CurrentValue = timestamp;
+            return _context.SaveChanges();
+        }
+
         public int RemoveBattleFromSamurai(string samuraiName, string battleName)
         {
             Samurai samuraiWithBattles;
@@ -92,6 +142,12 @@ namespace SomeUI
                 allTheBattles.Add(battle.Battle);
             }
             return allTheBattles;
+        }
+
+        public string GetSecretIdentity(string name)
+        {
+            var samurai = _context.Samurais.Include(si => si.SecretIdentity).FirstOrDefault(s => s.Name == name);
+            return samurai.SecretIdentity.RealName.ToString();
         }
 
         public int AddNewSamuraiWithSecretIdentity()

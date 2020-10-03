@@ -30,20 +30,26 @@ namespace SomeUI
             //query.EnlistSamuraiIntoBattleUntracked("Lewis Burwell Puller", "Peleliu");
             //query.EnlistSamuraiIntoBattleUntracked("Robert Leckie", "Guadalcanal");
             //query.EnlistSamuraiIntoBattleUntracked("Robert Leckie", "Peleliu");
-
+            //query.AddNewSamuraiWithSecretIdentity();
             //query.EnlistSamuraiIntoBattleUntracked("Eugene Bondurant Sledge", "Okinawa");
             //query.EnlistSamuraiIntoBattleUntracked("Eugene Bondurant Sledge", "Peleliu");
 
-            //query.AddNewSamuraiWithSecretIdentity();
 
+            //query.AddSecretIdentityUsingSamuraiName("Lewis Burwell Puller", "Chesty");
             //query.ReplaceSecretIdentity("Lewis Burwell Puller", "Chesty baby");
 
             //query.RemoveSecretIdentity("Lewis Burwell Puller");
 
             Console.WriteLine("Hey Dude.");
 
+            //query.AddCreateDateToSamurai("John Basilone");
+            //query.AddCreateDateToSamurai("Eugene Bondurant Sledge");
+            //query.AddCreateDateToSamurai("Merritt Austin Edson");
+            //query.AddCreateDateToSamurai("Robert Leckie");
+            //query.AddCreateDateToSamurai("Lewis Burwell Puller");
 
-            query.AddSecretIdentityUsingSamuraiName("Lewis Burwell Puller", "Chesty");
+            query.RemoveSamurai("Robert Leckie");
+            query.MakeSamurai(SpareSamurais.robertLeckie);
 
             var result1 = query.GetSamuraiWithBattles("John Basilone");
             Console.WriteLine("\n-In Bewteen Queries-\n");
@@ -66,11 +72,22 @@ namespace SomeUI
             {
                 Console.WriteLine($"\nEugene Sledge was in this battle: {battle.Name}\n");
             }
-
+            Console.WriteLine("\nLewis Burwell Puller's secret Identity is: " + query.GetSecretIdentity("Lewis Burwell Puller"));
             foreach (var battle in result3)
             {
                 Console.WriteLine($"\nChesty Puller was in this battle: {battle.Name}\n");
             }
+            Console.WriteLine("----");
+            var result4 =     query.RetrieveSamuraisCreatedInPastWeek();
+
+            var result5 = query.GetSamuraiWithBattles("Robert Leckie");
+
+            foreach (var battle in result5)
+            {
+                Console.WriteLine($"\nRobert Leckie was in this battle: {battle.Name}\n");
+                Console.WriteLine($"Robert Leckie was updated on {battle.SamuraiBattles}");
+            }
+
             Console.ReadKey();
         }
     }

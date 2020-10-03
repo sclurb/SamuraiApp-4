@@ -150,7 +150,7 @@ namespace SomeUI
             Quotes = chestyQuotes
         };
 
-        private readonly static Samurai robertLeckie = new Samurai()
+        public Samurai robertLeckie = new Samurai()
         {
             Name = "Robert Leckie",
             Quotes = robertLeckieQuotes
@@ -174,6 +174,8 @@ namespace SomeUI
             samuraiList.Add(robertLeckie);
             samuraiList.Add(johnBasilone);
         }
+
+
 
         public int MakeMultipleSamurai(List<Samurai> samurais)
         {

@@ -197,15 +197,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Migrations\20171117193749_initial.cs" />
-    <Compile Include="Migrations\20171117193749_initial.designer.cs">
-      <DependentUpon>20171117193749_initial.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\20171125220938_relationships.cs" />
-    <Compile Include="Migrations\20171125220938_relationships.designer.cs">
-      <DependentUpon>20171125220938_relationships.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\SamuraiContextModelSnapshot.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SamuraiContext.cs" />
   </ItemGroup>
