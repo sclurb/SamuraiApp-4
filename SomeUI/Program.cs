@@ -31,18 +31,45 @@ namespace SomeUI
             //query.EnlistSamuraiIntoBattleUntracked("Robert Leckie", "Guadalcanal");
             //query.EnlistSamuraiIntoBattleUntracked("Robert Leckie", "Peleliu");
 
-            query.RemoveBattleFromSamurai("John Basilone", "Iwo Jima");
-            query.EnlistSamuraiIntoBattleUntracked("John Basilone", "Iwo Jima");
+            //query.EnlistSamuraiIntoBattleUntracked("Eugene Bondurant Sledge", "Okinawa");
+            //query.EnlistSamuraiIntoBattleUntracked("Eugene Bondurant Sledge", "Peleliu");
 
+            //query.AddNewSamuraiWithSecretIdentity();
+
+            //query.ReplaceSecretIdentity("Lewis Burwell Puller", "Chesty baby");
+
+            //query.RemoveSecretIdentity("Lewis Burwell Puller");
 
             Console.WriteLine("Hey Dude.");
-            
+
+
+            query.AddSecretIdentityUsingSamuraiName("Lewis Burwell Puller", "Chesty");
 
             var result1 = query.GetSamuraiWithBattles("John Basilone");
+            Console.WriteLine("\n-In Bewteen Queries-\n");
+            var result2 = query.GetSamuraiWithBattles("Eugene Bondurant Sledge");
 
+            var result3 = query.GetSamuraiWithBattles("Lewis Burwell Puller");
+
+            Console.WriteLine("\n-After Queries-\n");
+
+            Console.WriteLine("------");
             foreach (var battle in result1)
             {
-                Console.WriteLine($"John Basilone was in this battle {battle.Name}");
+                Console.WriteLine($"\nJohn Basilone was in this battle: {battle.Name}\n");
+            }
+            Console.WriteLine("------");
+            
+
+
+            foreach (var battle in result2)
+            {
+                Console.WriteLine($"\nEugene Sledge was in this battle: {battle.Name}\n");
+            }
+
+            foreach (var battle in result3)
+            {
+                Console.WriteLine($"\nChesty Puller was in this battle: {battle.Name}\n");
             }
             Console.ReadKey();
         }

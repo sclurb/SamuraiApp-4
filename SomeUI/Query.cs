@@ -32,6 +32,37 @@ namespace SomeUI
             return _context.SaveChanges();
         }
 
+        public int AddSecretIdentityUsingSamuraiName(string samuraiName, string realIdentity)
+        {
+            var samurai = _context.Samurais.Where(s => s.Name == samuraiName);
+            var id = samurai.Select(s => s.Id).FirstOrDefault();
+            var identity = new SecretIdentity { SamuraiId = id, RealName = realIdentity };
+            _context.Add(identity);
+            return _context.SaveChanges();
+        }
+
+        public int ReplaceSecretIdentity(string samuraiName, string newIdentity)
+        {
+            var samurai = _context.Samurais.Where(s => s.Name == samuraiName)
+                .Include(si=> si.SecretIdentity);
+
+            var identity = samurai.Select(si => si.SecretIdentity).FirstOrDefault();
+            identity.RealName = newIdentity;
+            _context.Update(identity);
+
+            return _context.SaveChanges();
+        }
+
+        public int RemoveSecretIdentity(string samuraiName)
+        {
+            var samurai = _context.Samurais.Where(s => s.Name == samuraiName)
+                .Include(si => si.SecretIdentity);
+
+            var identity = samurai.Select(si => si.SecretIdentity).FirstOrDefault();
+            _context.Remove(identity);
+
+            return _context.SaveChanges();
+        }
 
 
         public int EnlistSamuraiIntoBattleUntracked(string samuraiName, string battleName)
@@ -61,6 +92,26 @@ namespace SomeUI
                 allTheBattles.Add(battle.Battle);
             }
             return allTheBattles;
+        }
+
+        public int AddNewSamuraiWithSecretIdentity()
+        {
+            var quotes = new List<Quote>()
+            {
+                new Quote
+                {
+                    Text = "The Japanese fought to win - it was a savage, brutal," +
+                    " inhumane, exhausting and dirty business."
+                },
+                new Quote
+                {
+                    Text = "Your soul may belong to Jesus, but your ass belongs to the marines."
+                }
+            };
+            var samurai = new Samurai { Name = "Eugene Bondurant Sledge" };
+            samurai.SecretIdentity = new SecretIdentity { RealName = "Sledge" };
+            _context.Add(samurai);
+            return _context.SaveChanges();
         }
     }
 }
